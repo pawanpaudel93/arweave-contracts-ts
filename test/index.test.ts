@@ -1,20 +1,17 @@
 import fs from "fs";
 import path from "path";
 import { default as ArLocal } from "arlocal";
-import { LoggerFactory, Warp, WarpFactory } from "warp-contracts";
+import { JWKInterface, LoggerFactory, Warp, WarpFactory, Contract } from "warp-contracts";
 import { DeployPlugin } from "warp-contracts-plugin-deploy";
 
 describe("Testing PST contract", () => {
   let arLocal: ArLocal,
     warp: Warp,
-    wallet: any,
+    wallet: JWKInterface,
     contractSrc: string,
-    initState: { balances: { [x: string]: number }; owner: string },
+    initState: State,
     contractId: string,
-    contract: {
-      readState: () => PromiseLike<{ cachedValue: any }> | { cachedValue: any };
-      writeInteraction: (arg0: { function: string; target?: any; qty: any }, arg1?: { strict: boolean }) => any;
-    },
+    contract: Contract<State>,
     walletAddress: string,
     targetAddress: string;
 
@@ -46,7 +43,7 @@ describe("Testing PST contract", () => {
       initState: JSON.stringify(initState),
       src: contractSrc,
     }));
-    contract = warp.contract(contractId).connect(wallet);
+    contract = warp.contract<State>(contractId).connect(wallet);
   });
 
   afterAll(async () => {

@@ -1,11 +1,12 @@
 import fs from "fs";
 import path from "path";
-import { WarpFactory } from "warp-contracts";
+import { JWKInterface, WarpFactory } from "warp-contracts";
 import { DeployPlugin, ArweaveSigner } from "warp-contracts-plugin-deploy";
+import { State } from "../types";
 import("dotenv/config");
 
 (async () => {
-  let wallet: any;
+  let wallet: JWKInterface;
 
   const warp = WarpFactory.forMainnet().use(new DeployPlugin());
   let walletDir = path.resolve(".secrets");
@@ -21,7 +22,7 @@ import("dotenv/config");
 
   const contractsDir = path.resolve("dist");
   const contractSrc = fs.readFileSync(path.join(contractsDir, "contract.js"), "utf8");
-  const initState = JSON.parse(fs.readFileSync(path.join(contractsDir, "init-state.json"), "utf8"));
+  const initState: State = JSON.parse(fs.readFileSync(path.join(contractsDir, "init-state.json"), "utf8"));
 
   console.log("Deployment started");
   const result = await warp.deploy({

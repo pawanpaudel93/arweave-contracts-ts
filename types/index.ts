@@ -1,4 +1,4 @@
-interface State {
+export interface State {
   balances: { [address: string]: number };
   canEvolve: boolean;
   ticker: string;
@@ -6,7 +6,7 @@ interface State {
   evolve: any;
 }
 
-interface Action {
+export interface Action {
   input: {
     function: string;
     target?: string;
@@ -16,27 +16,27 @@ interface Action {
   caller: string;
 }
 
-interface TransferInput {
+export interface TransferInput {
   function: "transfer";
   target: string;
   qty: number;
 }
 
-interface BalanceInput {
+export interface BalanceInput {
   function: "balance";
   target: string;
 }
 
-interface EvolveInput {
+export interface EvolveInput {
   function: "evolve";
   value: boolean;
 }
 
-interface TransferResult {
+export interface TransferResult {
   state: State;
 }
 
-interface BalanceResult {
+export interface BalanceResult {
   result: {
     target: string;
     ticker: string;
