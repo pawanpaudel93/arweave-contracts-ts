@@ -1,0 +1,6 @@
+.secrets/*
+!.secrets/.gitkeep
+node_modules
+logs
+yarn.lock
+dist

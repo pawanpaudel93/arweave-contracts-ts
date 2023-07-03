@@ -1,0 +1,35 @@
+{
+  "name": "arweave-contracts-ts-template",
+  "version": "1.0.0",
+  "description": "Arweave Contracts TS Template",
+  "main": "index.js",
+  "type": "module",
+  "author": {
+    "name": "Pawan Paudel",
+    "email": "pawanpaudel93@gmail.com"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.js && cp contracts/init-state.json dist/",
+    "deploy:testnet": "npm run build && ts-node --esm scripts/deploy-testnet.ts",
+    "deploy:mainnet": "npm run build && ts-node --esm scripts/deploy-mainnet.ts",
+    "test": "npm run build && vitest",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "arlocal": "^1.1.60",
+    "dotenv": "^16.3.1",
+    "esbuild": "^0.18.11",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "2.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6",
+    "vitest": "^0.32.4",
+    "warp-contracts": "^1.4.14",
+    "warp-contracts-plugin-deploy": "^1.0.9"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
+}
